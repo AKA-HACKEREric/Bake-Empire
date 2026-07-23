@@ -25,4 +25,4 @@ Create the ultimate bakery brand and become the greatest baker in the world.
 
 ## Developer
 
-Created by **HACKEREric**
+Created by **[HACKER Eric](https://github.com/AKA-HACKEREric)**
