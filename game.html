@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake Empire 🥐</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(err => console.log('SW failed: ', err));
+            });
+        }
+    </script>
+</head>
+<body>
+    <!-- Particles Container -->
+    <div id="particles-container"></div>
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="main-menu-overlay">
+        <div class="menu-deco deco-1">🥐</div>
+        <div class="menu-deco deco-2">🥖</div>
+        <div class="menu-deco deco-3">🍞</div>
+        <div class="menu-deco deco-4">🥯</div>
+        <div class="main-menu-panel glass-panel">
+            <h1 class="glowing-title" data-i18n="title">Bake Empire 🥐</h1>
+            <p class="menu-subtitle" data-i18n="menuSubtitle">🥖 點擊烤出你的麵包帝國 🥐</p>
+            <div class="menu-buttons">
+                <button id="btn-main-action" class="menu-btn primary-btn"></button>
+                <button id="btn-menu-how-to-play" class="menu-btn secondary-btn" data-i18n="howToPlayBtn">📖 如何遊玩</button>
+                <button id="btn-settings" class="menu-btn secondary-btn" data-i18n="menuSettings">⚙️ 設定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-panel">
+            <h2 data-i18n="menuSettings">⚙️ 設定</h2>
+            <div class="settings-body">
+                <label data-i18n="menuLanguage">語言 / Language</label>
+                <select id="settings-lang-select">
+                    <option value="zh">繁體中文</option>
+                    <option value="en">English</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                    <option value="fr">Français</option>
+                    <option value="es">Español</option>
+                    <option value="th">ไทย</option>
+                    <option value="vi">Tiếng Việt</option>
+                    <option value="id">Bahasa Indonesia</option>
+                </select>
+                <label data-i18n="menuVolume">音量 / Volume</label>
+                <div class="volume-row">
+                    <input type="range" id="volume-slider" min="0" max="100" value="60">
+                    <span id="volume-label">60%</span>
+                </div>
+                <div class="settings-divider"></div>
+                <button id="settings-reset-btn" class="danger-btn" data-i18n="resetBtn" style="width:100%">重置遊戲進度</button>
+            </div>
+            <button id="close-settings-btn" class="info-btn" data-i18n="modalReady">確定</button>
+        </div>
+    </div>
+
+    <div class="app-container" id="game-container">
+        <!-- Main Game Area -->
+        <div class="game-area">
+            <button id="btn-back-menu" class="back-menu-btn" data-i18n="backMenu">← 回首頁</button>
+            <div class="score-board">
+                <h1 class="glowing-title" data-i18n="title">Bake Empire 🥐</h1>
+                <h2 class="score-display"><span data-i18n="scoreLabel">麵包數量: </span><span id="score">0</span> 🍞</h2>
+                <p><span data-i18n="ppsLabel">每秒產量: </span><span id="pps">0</span></p>
+            </div>
+
+            <div class="clicker-container">
+                <div id="tutorial-hint" class="tutorial-hint hidden" data-i18n="tutorialHint">👆 點擊這裡開始做麵包！</div>
+                <button id="main-clicker" class="awa-image-button">
+                    <img id="clicker-img" src="assets/images/oven1.png" alt="Bake Empire Clicker">
+                </button>
+            </div>
+
+            <div class="save-indicator" id="save-indicator" data-i18n="saveIndicator">已自動儲存</div>
+        </div>
+
+        <!-- Shop Area -->
+        <div class="shop-area glass-panel">
+            <h2 data-i18n="shopTitle">烘焙坊商店 🛒</h2>
+            <p class="shop-desc" data-i18n="shopDesc">購買設備與雇用員工來增加產量！</p>
+            
+            <div id="shop-items-container">
+                <!-- Dynamically populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorial-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-panel">
+            <h2 data-i18n="modalTitle">歡迎來到 Bake Empire！ 🥐</h2>
+            <div class="modal-body">
+                <p><strong data-i18n="modalB1">1. 手動生產：</strong><span data-i18n="modalB1Desc"> 點擊畫面中央的按鈕來手動製造麵包。</span></p>
+                <p><strong data-i18n="modalB2">2. 購買升級：</strong><span data-i18n="modalB2Desc"> 收集麵包後，在右側商店購買升級與設備。</span></p>
+                <p><strong data-i18n="modalB3">3. 強化點擊：</strong><span data-i18n="modalB3Desc"> 「擀麵棍」等道具能增加你每次點擊的產量。</span></p>
+                <p><strong data-i18n="modalB4">4. 自動生產：</strong><span data-i18n="modalB4Desc"> 「自動烤箱」等設備能每秒自動生產麵包。</span></p>
+                <p class="highlight-text" data-i18n="modalHighlight">趕快建立你的麵包帝國吧！</p>
+                <p style="text-align:center">祝你好運 awa</p>
+            </div>
+            <button id="close-modal-btn" class="info-btn" data-i18n="modalReady">我準備好了！</button>
+        </div>
+    </div>
+
+    <audio id="oven-sound" src="assets/sounds/oven-timer.mp3" preload="auto"></audio>
+    <audio id="cash-sound" src="assets/sounds/cash-register.mp3" preload="auto"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
