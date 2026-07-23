@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bake Empire 🥐</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').catch(err => console.log('SW failed: ', err));
+                navigator.serviceWorker.register('js/sw.js').catch(err => console.log('SW failed: ', err));
             });
         }
     </script>
@@ -58,6 +58,13 @@
                     <input type="range" id="volume-slider" min="0" max="100" value="60">
                     <span id="volume-label">60%</span>
                 </div>
+                <div class="settings-divider"></div>
+                <label data-i18n="redeemTitle">🎁 兌換代碼</label>
+                <div class="redeem-row">
+                    <input type="text" id="redeem-input" class="redeem-input" data-i18n-placeholder="redeemPlaceholder" placeholder="輸入代碼..." maxlength="20" autocomplete="off">
+                    <button id="redeem-btn" class="redeem-btn" data-i18n="redeemBtn">兌換</button>
+                </div>
+                <div id="redeem-msg" class="redeem-msg"></div>
                 <div class="settings-divider"></div>
                 <button id="settings-reset-btn" class="danger-btn" data-i18n="resetBtn" style="width:100%">重置遊戲進度</button>
             </div>
@@ -114,6 +121,6 @@
 
     <audio id="oven-sound" src="assets/sounds/oven-timer.mp3" preload="auto"></audio>
     <audio id="cash-sound" src="assets/sounds/cash-register.mp3" preload="auto"></audio>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
