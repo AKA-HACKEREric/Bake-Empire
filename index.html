@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bake Empire 🥐</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="CSS/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('js/sw.js').catch(err => console.log('SW failed: ', err));
+                navigator.serviceWorker.register('JS/sw.js').catch(err => console.log('SW failed: ', err));
             });
         }
     </script>
@@ -121,6 +121,6 @@
 
     <audio id="oven-sound" src="assets/sounds/oven-timer.mp3" preload="auto"></audio>
     <audio id="cash-sound" src="assets/sounds/cash-register.mp3" preload="auto"></audio>
-    <script src="js/script.js"></script>
+    <script src="JS/script.js"></script>
 </body>
 </html>
